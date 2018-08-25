@@ -46,7 +46,7 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
     TextView tvRevive;
     private RewardedVideoAd mRewardedVideoAd;
     private NativeExpressAdView nativeExpressAdView;
-    private static final String FILE_NAME = "best_score.txt";
+    private static final String FILE_NAME = "best_score_multiplication_table_quiz.txt";
     boolean revive = false;
     private static final String TAG = "MainActivity";
     private AdView mAdView;

@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="363dp"
-        android:layout_height="306dp"
+        android:layout_width="330dp"
+        android:layout_height="260dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -19,10 +19,11 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.789"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.673"
-        app:srcCompat="@drawable/icon" />
+        app:layout_constraintVertical_bias="0.702"
+        app:srcCompat="@drawable/multiplication_table_icon" />
 
     <TextView
         android:id="@+id/tv1"
@@ -33,7 +34,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="casual"
-        android:text="Math for first grade"
+        android:text="multiplication table quiz"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="50sp"

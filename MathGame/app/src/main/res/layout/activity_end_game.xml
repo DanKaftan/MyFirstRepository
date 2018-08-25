@@ -75,17 +75,17 @@
 
     <Button
         android:id="@+id/btnrevive"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/revie_btn"
-        ads:layout_constraintBottom_toTopOf="@+id/btnStartNewGame"
-        ads:layout_constraintHorizontal_bias="0.478"
-        ads:layout_constraintTop_toBottomOf="@+id/finalScoretv"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintHorizontal_bias="0.461"
+        ads:layout_constraintTop_toTopOf="parent"
+        ads:layout_constraintVertical_bias="0.676"
         app:layout_constraintEnd_toStartOf="@+id/tvBestScore"
-        app:layout_constraintStart_toEndOf="@+id/tvFinalScore"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toEndOf="@+id/tvFinalScore" />
 
 
     <ImageView
