@@ -2,6 +2,7 @@ package com.dan.kaftan.onlineshop2;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -25,13 +26,14 @@ import java.io.IOException;
 public class get_image extends AppCompatActivity {
 
 
-    Button buttonDownload;
     ImageView imageView;
-    EditText editTextName;
     Bitmap bitmap;
-
+    int itemsNum = 4;
+    int i;
     ProgressDialog pd;
     Uri file;
+
+    String [] images_names = new String[itemsNum];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,59 +41,62 @@ public class get_image extends AppCompatActivity {
         setContentView(R.layout.activity_get_image);
 
 
-        buttonDownload = (Button)findViewById(R.id.btndownload);
-        editTextName = (EditText)findViewById(R.id.editText);
-        onClick();
+        imageView = (ImageView) findViewById(R.id.iv);
 
-    }
+        setImagesFiles();
 
-    public void onClick (){
+       for (i=0; i <itemsNum; i++) {
 
-    buttonDownload.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
             downloadImage();
-        }
-    });
+
+       }
+
+   }
 
 
+
+    private void downloadImage() {
+
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl("gs://online-shop-a32c0.appspot.com");
+
+
+        storageRef.child("items_images/"+images_names[i]).getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+
+                try {
+
+
+                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    imageView.setImageBitmap(bmp);
+
+                    wait(2000);
+
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    //     pd.dismiss();
+
+                }
+
+            }
+        });
+    }
+
+
+
+    private void setImagesFiles (){
+
+        images_names[0] = "board.jpg";
+        images_names[1] = "hammer.jpg";
+        images_names[2] = "nail.jpg";
+        images_names[3] = "saw.jpg";
 
 
 
     }
-
-
-   private void downloadImage(){
-
-       FirebaseStorage storage = FirebaseStorage.getInstance();
-       StorageReference storageRef = storage.getReferenceFromUrl("gs://online-shop-a32c0.appspot.com");
-
-
-       storageRef.child("images/nail.jpg").getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-           @Override
-           public void onSuccess(byte[] bytes) {
-
-               String path =getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)+ "/"+editTextName.getText().toString();
-
-               try {
-                   FileOutputStream fos = new FileOutputStream(path);
-                   fos.write(bytes);
-                   fos.close();
-
-
-               } catch (FileNotFoundException e) {
-                   e.printStackTrace();
-               } catch (IOException e) {
-                   e.printStackTrace();
-               }
-          //     pd.dismiss();
-
-           }
-       }).addOnFailureListener(new OnFailureListener() {
-           @Override
-           public void onFailure(@NonNull Exception e) {
-               pd.dismiss();
-           }
-       });
-   }
 }
