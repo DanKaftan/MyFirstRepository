@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".get_image"></activity>
+        <activity android:name=".get_image" />
+        <activity android:name=".ListView"></activity>
     </application>
 
 </manifest>

@@ -1,75 +1,49 @@
 package com.dan.kaftan.onlineshop2;
 
 
-import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class get_image extends AppCompatActivity {
 
-
-    ImageView imageView1;
+    ImageView imageView;
     ImageView imageView2;
     ImageView imageView3;
     ImageView imageView4;
     ImageView [] imageViews = new ImageView[4];
-
     TextView tv;
-    String imageNamesFile = "images_names.txt";
-
+    String imageNamesFile = "items_details.txt";
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReferenceFromUrl("gs://online-shop-a32c0.appspot.com");
+    ArrayList<Item> items = new ArrayList<Item>();
 
-
-    List<String> images_names = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_image);
 
-        imageView1 = (ImageView) findViewById(R.id.iv1);
-        imageView2 = (ImageView) findViewById(R.id.iv2);
-        imageView3 = (ImageView) findViewById(R.id.iv3);
-        imageView4 = (ImageView) findViewById(R.id.iv4);
-
-        imageViews[0]= imageView1;
-        imageViews[1]= imageView2;
-        imageViews[2]= imageView3;
-        imageViews[3]= imageView4;
 
 
-        tv = (TextView) findViewById(R.id.tv);
 
         downloadImages();
     }
@@ -98,22 +72,17 @@ public class get_image extends AppCompatActivity {
                             break;
                         }
 
-                        images_names.add(line);
+                        Item item = createItem(line);
                     }
 
-                    int i =0;
-                    for (String line : images_names){
-                        downloadImage("items_images", line, imageViews[i]);
-                        i++;
-                    }
+                    Intent i = new Intent(get_image.this, com.dan.kaftan.onlineshop2.ListView.class);
+                    i.putExtra("items",items);
+                    startActivity(i);
 
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.out.println(e);
-
-
                 }
-
             }
         });
 
@@ -137,6 +106,18 @@ public class get_image extends AppCompatActivity {
         });
     }
 
+    private Item createItem (String line){
+
+        String [] lineSplit =line.split(",");
+
+        Item item = new Item();
+        item.setName(lineSplit[0]);
+        item.setPrice(Integer.valueOf(lineSplit[1]));
+        item.setItemImageFile(lineSplit[2]);
+        items.add(item);
+        return item;
+
+    }
+
 
 }
-
