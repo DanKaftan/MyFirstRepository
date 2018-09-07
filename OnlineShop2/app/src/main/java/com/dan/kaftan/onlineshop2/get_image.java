@@ -31,7 +31,7 @@ public class get_image extends AppCompatActivity {
     ImageView imageView4;
     ImageView [] imageViews = new ImageView[4];
     TextView tv;
-    String imageNamesFile = "items_details.txt";
+    String imageNamesFile = "items_details_heb.txt";
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReferenceFromUrl("gs://online-shop-a32c0.appspot.com");
     ArrayList<Item> items = new ArrayList<Item>();
@@ -57,7 +57,7 @@ public class get_image extends AppCompatActivity {
                 try {
 
                     ByteArrayInputStream in = new ByteArrayInputStream(bytes);
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in,"UTF-8"));
 
                     while (true) {
                         String line;
@@ -66,7 +66,7 @@ public class get_image extends AppCompatActivity {
                             if (line == null){
                                 break;
                             }
-                            System.out.println(line);
+                            System.out.println("line: " + line);
                         } catch (NullPointerException e) {
                             bufferedReader.close();
                             break;
@@ -111,10 +111,16 @@ public class get_image extends AppCompatActivity {
         String [] lineSplit =line.split(",");
 
         Item item = new Item();
+
+        System.out.println ("0: " + lineSplit[0]);
         item.setName(lineSplit[0]);
-        System.out.println ("line: " + lineSplit[0]);
+
+        System.out.println ("1: " + lineSplit[1]);
         item.setPrice(Integer.valueOf(lineSplit[1]));
-        item.setItemImageFile(lineSplit[2]);
+
+        System.out.println ("2: " + lineSplit[2]);
+        item.setItemImageFile(lineSplit[2].trim());
+
         items.add(item);
         return item;
 
