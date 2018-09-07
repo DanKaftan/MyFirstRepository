@@ -112,6 +112,7 @@ public class get_image extends AppCompatActivity {
 
         Item item = new Item();
         item.setName(lineSplit[0]);
+        System.out.println ("line: " + lineSplit[0]);
         item.setPrice(Integer.valueOf(lineSplit[1]));
         item.setItemImageFile(lineSplit[2]);
         items.add(item);
