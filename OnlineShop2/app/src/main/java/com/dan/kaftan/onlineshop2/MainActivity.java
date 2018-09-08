@@ -15,10 +15,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        btn = (Button)findViewById(R.id.btn);
-        onClick();
+        Intent i = new Intent(MainActivity.this, get_image.class);
+        startActivity(i);
+//        btn = (Button)findViewById(R.id.btn);
+//        onClick();
+        startService(new Intent(this, MyService.class));
     }
 
 
