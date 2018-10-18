@@ -208,6 +208,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="8dp"
+        android:visibility="invisible"
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-7775472521601802/4903178791"
         ads:layout_constraintBottom_toBottomOf="parent"

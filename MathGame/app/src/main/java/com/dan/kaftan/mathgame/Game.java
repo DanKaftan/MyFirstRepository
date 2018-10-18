@@ -102,7 +102,7 @@ public class Game extends AppCompatActivity {
         timer = (TextView) findViewById(R.id.timer);
 
         initTargilim(10,10,100,false,"x");
-//        initTargilim(9,9,10, true,"+");
+     //   initTargilim(9,9,10, true,"+");
 
         correctSound= MediaPlayer.create(Game.this,R.raw.correct);
         falseSound= MediaPlayer.create(Game.this,R.raw.eror);
@@ -111,8 +111,8 @@ public class Game extends AppCompatActivity {
 
 
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-       mAdView.loadAd(adRequest);
+        //AdRequest adRequest = new AdRequest.Builder().build();
+      // mAdView.loadAd(adRequest);
 
         setGame();
 

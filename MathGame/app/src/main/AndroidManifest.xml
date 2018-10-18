@@ -4,21 +4,21 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/icon"
-        android:label="Math for first grade"
+        android:icon="@drawable/multiplication_table_icon"
+        android:label="multiplication table quiz"
         android:roundIcon="@drawable/multiplication_table_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Game" />
-        <activity android:name=".welcome_screen">
+        <activity android:name="com.dan.kaftan.mathgame.MainActivity" />
+        <activity android:name="com.dan.kaftan.mathgame.Game" />
+        <activity android:name="com.dan.kaftan.mathgame.welcome_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EndGame" />
+        <activity android:name="com.dan.kaftan.mathgame.EndGame" />
     </application>
 
 </manifest>

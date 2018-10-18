@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:104288827800:android:83e2246dc3fe0e96",
         "android_client_info": {
-          "package_name": "com.dan.kaftan.mathgame"
+          "package_name": "com.dan.kaftan.multiplactiongame"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "104288827800-md655csb8efhlc7sgd8bs8ur6fnpiqdb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.dan.kaftan.mathgame",
+            "package_name": "com.dan.kaftan.multiplactiongame",
             "certificate_hash": "ff70778ef356282941b90151c3275dfdd062d7b8"
           }
         },
