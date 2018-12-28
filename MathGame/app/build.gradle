@@ -8,7 +8,7 @@ android {
     }
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.dan.kaftan.mathgame"
+        applicationId "com.dan.kaftan.multiplactiongame"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 26
