@@ -16,7 +16,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/sharebtn"
-        ads:layout_constraintHorizontal_bias="0.784"
+        ads:layout_constraintHorizontal_bias="0.209"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -152,7 +152,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-7775472521601802/7182304883"
+        ads:adUnitId="ca-app-pub-7775472521601802/4023863540"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintTop_toTopOf="parent"
         ads:layout_constraintVertical_bias="0.984"
@@ -167,7 +167,7 @@
         android:layout_height="60dp"
         android:background="@drawable/rate_star"
         ads:layout_constraintEnd_toStartOf="@+id/imageView"
-        ads:layout_constraintHorizontal_bias="0.16"
+        ads:layout_constraintHorizontal_bias="0.579"
         ads:layout_constraintStart_toEndOf="@+id/imageView"
         ads:layout_constraintTop_toTopOf="parent" />
 
@@ -176,8 +176,10 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/settings"
         android:onClick="settingsBtn"
+        android:visibility="invisible"
         ads:layout_constraintEnd_toStartOf="@+id/rate_star_btn"
         ads:layout_constraintHorizontal_bias="0.0"
         ads:layout_constraintStart_toStartOf="parent"
@@ -190,7 +192,7 @@
         android:background="@drawable/mute_off_btn"
         android:onClick="muteOnClick"
         ads:layout_constraintEnd_toStartOf="@+id/imageView"
-        ads:layout_constraintHorizontal_bias="0.0"
+        ads:layout_constraintHorizontal_bias="0.516"
         ads:layout_constraintStart_toEndOf="@+id/settings_btn"
         ads:layout_constraintTop_toTopOf="parent" />
 

@@ -11,8 +11,8 @@ android {
         applicationId "com.dan.kaftan.multiplactiongame"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 26
-        versionName "26"
+        versionCode 5
+        versionName "5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

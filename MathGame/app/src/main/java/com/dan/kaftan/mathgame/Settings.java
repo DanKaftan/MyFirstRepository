@@ -220,7 +220,7 @@ public class Settings extends AppCompatActivity {
     private void getSelectedMaxAnswer(){
         FileInputStream fis = null;
         try {
-            fis = openFileInput("settings_difficulty");
+            fis = openFileInput("settings_difficulty_mult");
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
@@ -250,7 +250,7 @@ public class Settings extends AppCompatActivity {
     private void getSelectedTimerSeconds(){
         FileInputStream fis = null;
         try {
-            fis = openFileInput("settings_timer_seconds");
+            fis = openFileInput("settings_timer_seconds_mult");
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();

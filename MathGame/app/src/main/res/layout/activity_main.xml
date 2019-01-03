@@ -31,8 +31,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="4dp"
-        ads:adSize="LARGE_BANNER"
-        ads:adUnitId="ca-app-pub-7775472521601802/4903178791"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-7775472521601802/8626110078"
         ads:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,13 +53,13 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="232dp"
-        android:layout_height="213dp"
+        android:layout_height="170dp"
         ads:layout_constraintBottom_toTopOf="@+id/btn"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintStart_toStartOf="parent"
         ads:layout_constraintTop_toTopOf="parent"
         ads:layout_constraintVertical_bias="0.86"
-        ads:srcCompat="@mipmap/icon" />
+        ads:srcCompat="@drawable/multiplication_table_icon" />
 
     <Button
         android:id="@+id/mute_btn"

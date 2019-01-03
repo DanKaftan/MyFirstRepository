@@ -71,7 +71,7 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
 
 
         btnRevive = (Button) findViewById(R.id.btnrevive);
-        MobileAds.initialize(this, "ca-app-pub-7775472521601802~5091426220");
+        MobileAds.initialize(this, "ca-app-pub-7775472521601802~9463892489");
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         mRewardedVideoAd.setRewardedVideoAdListener(this);
 
@@ -138,7 +138,7 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
                 }
                 catch (ActivityNotFoundException e){
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + "https://play.google.com/store/apps/details?id=com.dan.kaftan.mathgame")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + "https://play.google.com/store/apps/details?id=com.dan.kaftan.multiplactiongame&hl=en")));
 
                 }
             }
@@ -169,7 +169,7 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
             public void onClick(View view) {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
-                String shareBody = "Amazing math game for first graders: https://play.google.com/store/apps/details?id=com.dan.kaftan.mathgame";
+                String shareBody = "Amazing math game for first graders: https://play.google.com/store/apps/details?id=com.dan.kaftan.multiplactiongame&hl=en";
                 String shareSub = "You might like this app:";
                 myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
                 myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
@@ -211,7 +211,7 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
 
 
     private void loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd("ca-app-pub-7775472521601802/7600355285",
+        mRewardedVideoAd.loadAd("ca-app-pub-7775472521601802/5261580138",
                 new AdRequest.Builder().build());
     }
 
@@ -371,13 +371,14 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
 
 
     public void settingsBtn(View view){
-        Intent intent = new Intent(EndGame.this,Settings.class);
+      /*  Intent intent = new Intent(EndGame.this,Settings.class);
         boolean isFromEnd = true;
         intent.putExtra("isFromEnd",isFromEnd);
         intent.putExtra("score",score);
         intent.putExtra("revive",revive);
         intent.putExtra("mute", mute);
-        startActivity(intent);
+      startActivity(intent);
+       */
     }
 
     public void setMute(){

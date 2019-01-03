@@ -105,7 +105,7 @@ public class Game extends AppCompatActivity {
         rand1 = random.nextInt(2);
         if(rand1==1) {
             interstitialAd = new InterstitialAd(this);
-            interstitialAd.setAdUnitId("ca-app-pub-7775472521601802/1382168273");
+            interstitialAd.setAdUnitId("ca-app-pub-7775472521601802/1130763435");
             interstitialAd.loadAd(new AdRequest.Builder().build());
 
             interstitialAd.setAdListener(new AdListener() {
@@ -142,9 +142,9 @@ public class Game extends AppCompatActivity {
 
         getDifficulty();
         getTimerSeconds();
-   //     initTargilim(10,10,100,false,"x");
+        initTargilim(10,10,100,false,"x");
 
-        initTargilim(maxAnswer-1,maxAnswer-1,maxAnswer, true,"+");
+    //    initTargilim(maxAnswer-1,maxAnswer-1,maxAnswer, true,"+");
 
         correctSound= MediaPlayer.create(Game.this,R.raw.correct);
         falseSound= MediaPlayer.create(Game.this,R.raw.eror);
@@ -517,7 +517,7 @@ public class Game extends AppCompatActivity {
     private void getTimerSeconds(){
         FileInputStream fis = null;
         try {
-            fis = openFileInput("settings_timer_seconds");
+            fis = openFileInput("settings_timer_seconds_mult");
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
@@ -548,7 +548,7 @@ public class Game extends AppCompatActivity {
     private void getDifficulty(){
         FileInputStream fis = null;
         try {
-            fis = openFileInput("settings_difficulty");
+            fis = openFileInput("settings_difficulty_mult");
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
