@@ -6,13 +6,13 @@ android {
         checkReleaseBuilds false
 
     }
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.dan.kaftan.mathgame"
         minSdkVersion 21
-        targetSdkVersion 26
-        versionCode 26
-        versionName "26"
+        targetSdkVersion 27
+        versionCode 28
+        versionName "28"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
