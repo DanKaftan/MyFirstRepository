@@ -111,8 +111,8 @@ public class Game extends AppCompatActivity {
 
 
 
-        //AdRequest adRequest = new AdRequest.Builder().build();
-      // mAdView.loadAd(adRequest);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         setGame();
 

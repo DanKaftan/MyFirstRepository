@@ -60,38 +60,38 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
 
 
         btnRevive = (Button) findViewById(R.id.btnrevive);
-       // MobileAds.initialize(this, "ca-app-pub-7775472521601802~5091426220");
-      //  mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
-      //  mRewardedVideoAd.setRewardedVideoAdListener(this);
+        MobileAds.initialize(this, "ca-app-pub-7775472521601802~5091426220");
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        mRewardedVideoAd.setRewardedVideoAdListener(this);
 
         rateStarBtn = (Button)findViewById(R.id.rate_star_btn);
         tvBestScore = (TextView)findViewById(R.id.tvBestScore);
 
 
-      //  mAdView = findViewById(R.id.adView);
-     //   AdRequest adRequest = new AdRequest.Builder().build();
-       // mAdView.loadAd(adRequest);
+        mAdView = findViewById(R.id.adView);
+       AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
 
         copyReviveFromPrevActivity();
         copyScoreFromPrevActivity();
 
-       // if (!revive) {
-           // loadRewardedVideoAd();
-          //  btnRevive.setOnClickListener(new View.OnClickListener() {
-             //   @Override
-             //   public void onClick(View view) {
-                 //   if (mRewardedVideoAd.isLoaded()) {
-                   //     mRewardedVideoAd.show();
-                  //      revive = true;
-                  //  }
-              // }
-           // });
-        //}
-        // else {
-        //    btnRevive.setVisibility(View.INVISIBLE);
-        //    tvRevive.setVisibility(View.INVISIBLE);
-      // }
+        if (!revive) {
+            loadRewardedVideoAd();
+           btnRevive.setOnClickListener(new View.OnClickListener() {
+               @Override
+                public void onClick(View view) {
+                    if (mRewardedVideoAd.isLoaded()) {
+                        mRewardedVideoAd.show();
+                        revive = true;
+                    }
+               }
+            });
+        }
+         else {
+           btnRevive.setVisibility(View.INVISIBLE);
+            tvRevive.setVisibility(View.INVISIBLE);
+       }
 
 
 
