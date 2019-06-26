@@ -2,25 +2,31 @@ package com.dan.kaftan.mathgame;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
-    Button btn;
     Button settingsBtn;
     Button muteBtn;
+    Button levelBtn;
     int i = 0;
     private static final String TAG = "MainActivity";
     private AdView mAdView;
     MediaPlayer mainActivityBackgroud;
     boolean isVisible =true;
     boolean mute = false;
+    boolean isLevel = false;
+
 
 
     @Override
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         settingsBtn = (Button)findViewById(R.id.settings_btn);
         muteBtn = (Button)findViewById(R.id.mute_btn);
+        levelBtn = (Button)findViewById(R.id.lv_btn);
 
 
 
@@ -43,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
-
 
     }
 
@@ -77,12 +82,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void muteOnClick(View view) {
 
-        if (!mute){
+        if (!mute) {
             mute = true;
             muteBtn.setBackgroundResource(R.drawable.mute_on_btn);
             mainActivityBackgroud.pause();
-        }
-        else{
+        } else {
             mute = false;
             muteBtn.setBackgroundResource(R.drawable.mute_off_btn);
             mainActivityBackgroud.start();
@@ -91,4 +95,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public void levelOnClick(View view) {
+
+        isLevel = true;
+
+        mainActivityBackgroud.pause();
+        Intent i = new Intent(MainActivity.this, Game.class);
+        i.putExtra("mute",mute);
+        i.putExtra("isLevel",isLevel);
+        startActivity(i);
+    }
 }
+
+

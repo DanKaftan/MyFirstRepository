@@ -1,7 +1,6 @@
 package com.dan.kaftan.mathgame;
 
 import android.content.Intent;
-import android.media.MediaDataSource;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -35,39 +35,52 @@ import com.google.android.gms.ads.reward.RewardedVideoAd;
 
 public class Game extends AppCompatActivity {
 
-    TextView tv;
+
     private AdView mAdView;
+
     List<Integer> answers = new ArrayList<>();
+
     int fakeAnswer1 = 0;
     int fakeAnswer2 = 0;
     int fakeAnswer3 = 0;
     int trueAnswer = 0;
+    int invalidationCounter = 0;
+    int score = 0;
+    int timerSeconds=10;
+    int maxAnswer=10;
+    int maxResult = Integer.MIN_VALUE;
+    int minResult = Integer.MAX_VALUE;
+    int levelNum = 1;
+    int currentExNum = 0;
+    static int rand1;
+
+
+    TextView tv;
     TextView tva1;
     TextView tva2;
     TextView tva3;
     TextView tva4;
     TextView timer;
+    TextView tvScore;
+
     ImageView iv;
     ImageView hiv1;
     ImageView hiv2;
     ImageView hiv3;
-    int invalidationCounter = 0;
+
     Random rand = new Random();
-    int score = 0;
-    TextView tvScore;
-    boolean answerCheck = false;
+
     private CountDownTimer mcountDownTimer;
     private CountDownTimer viewResultTimer;
+
+    boolean answerCheck = false;
     boolean revive= false;
-    int timerSeconds=10;
-    int maxAnswer=10;
-
-    int maxResult = Integer.MIN_VALUE;
-    int minResult = Integer.MAX_VALUE;
-
-
+    boolean mute;
+    boolean isLevel;
     // for disabling sound
     boolean  isVisible = true;
+    boolean gameOver = false;
+
 
     // sounds
     MediaPlayer correctSound;
@@ -75,17 +88,9 @@ public class Game extends AppCompatActivity {
     MediaPlayer threeSecondsSound;
     MediaPlayer gameSound;
 
-    boolean gameOver = false;
     private static final String TAG = "MainActivity";
 
     static InterstitialAd interstitialAd;
-
-    static int rand1;
-
-    boolean mute;
-
-
-
 
 
 
@@ -93,14 +98,25 @@ public class Game extends AppCompatActivity {
     BankOfTargils bankOfTargils = new BankOfTargils();
     private RewardedVideoAd mRewardedVideoAd;
 
+
+    int [] timeArray = new int [20];
+    int [] exNumArray = new int [20];
+    int [] maxResultArray = new int [20];
+
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         getSupportActionBar().hide();
 
-
-
+        setViews();
+        levelMode();
         Random random = new Random();
         rand1 = random.nextInt(2);
         if(rand1==1) {
@@ -119,25 +135,9 @@ public class Game extends AppCompatActivity {
 
         }
 
-
-
-
-        tv = (TextView) findViewById(R.id.tv);
-
-        tva1 = (TextView) findViewById(R.id.tva1);
-        tva2 = (TextView) findViewById(R.id.tva2);
-        tva3 = (TextView) findViewById(R.id.tva3);
-        tva4 = (TextView) findViewById(R.id.tva4);
-        iv = (ImageView) findViewById(R.id.iv);
-        hiv1 = (ImageView) findViewById(R.id.hiv1);
-        hiv2 = (ImageView) findViewById(R.id.hiv2);
-        hiv3 = (ImageView) findViewById(R.id.hiv3);
-        tvScore = (TextView) findViewById(R.id.score);
-        mAdView = findViewById(R.id.adView);
         copyReviveFromPrevActivity();
         copyScoreFromPrevActivity(revive);
         tvScore.setText("score: " + Integer.toString(score));
-        timer = (TextView) findViewById(R.id.timer);
 
 
         getDifficulty();
@@ -146,12 +146,7 @@ public class Game extends AppCompatActivity {
 
         initTargilim(maxAnswer-1,maxAnswer-1,maxAnswer, true,"+");
 
-        correctSound= MediaPlayer.create(Game.this,R.raw.correct);
-        falseSound= MediaPlayer.create(Game.this,R.raw.eror);
-        threeSecondsSound = MediaPlayer.create(Game.this,R.raw.three_seconds);
-        gameSound= MediaPlayer.create(Game.this,R.raw.game_sound);
-
-
+        setSound();
 
         AdRequest adRequest = new AdRequest.Builder().build();
        mAdView.loadAd(adRequest);
@@ -343,6 +338,8 @@ public class Game extends AppCompatActivity {
     public void handleClick(View v, TextView tva, boolean timeOut) throws InterruptedException {
         try {
 
+            currentExNum ++;
+
             // first, cancel timer as the user clicked
             if (mcountDownTimer != null) {
                 mcountDownTimer.cancel();
@@ -398,11 +395,18 @@ public class Game extends AppCompatActivity {
                 }
             }
             tvScore.setText("score: " + Integer.toString(score));
-
-            if (invalidationCounter != 3) {
-                setTimerForViewResult();
-            } else {
-                setTimerForGameOver();
+            if (!isLevel) {
+                if (invalidationCounter != 3) {
+                    setTimerForViewResult();
+                } else {
+                    setTimerForGameOver();
+                }
+            }
+            else
+            {
+                if (exNumArray [levelNum -1] == currentExNum){
+                    setTimerForGameOver();
+                }
             }
 
         } catch (Exception e) {
@@ -525,7 +529,12 @@ public class Game extends AppCompatActivity {
             while ((text = br.readLine()) != null){
 
                 sb.append(text);
-                timerSeconds = Integer.parseInt(sb.toString());
+                if (isLevel){
+                    timerSeconds = timeArray[levelNum-1];
+                }
+                else {
+                    timerSeconds = Integer.parseInt(sb.toString());
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -586,6 +595,154 @@ public class Game extends AppCompatActivity {
     {
         moveTaskToBack(true);
     }
+
+
+
+
+
+    public void levelMode (){
+
+        setLevel();
+        setLevelsArrays();
+
+        Intent intent = getIntent();
+        isLevel = intent.getBooleanExtra("isLevel", false);
+        tvScore.setVisibility(View.INVISIBLE);
+        hiv1.setVisibility(View.INVISIBLE);
+        hiv2.setVisibility(View.INVISIBLE);
+        hiv3.setVisibility(View.INVISIBLE);
+
+        initTargilim(maxAnswer-1,maxAnswer-1, maxResultArray[levelNum-1], true,"+");
+
+
+
+    }
+
+
+    private void setLevel(){
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput("level");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+            while ((text = br.readLine()) != null){
+
+                sb.append(text);
+                levelNum = Integer.parseInt(sb.toString());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            if(fis != null){
+
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+
+
+
+    private void saveLevel(){
+        FileOutputStream fos = null;
+
+
+        try {
+            fos = openFileOutput("level", MODE_PRIVATE);
+            fos.write(Integer.toString(levelNum).getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            if (fos != null){
+
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
+    private void setLevelsArrays (){
+
+        timeArray[0] = 15;
+        timeArray[1] = 15;
+        timeArray[2] = 10;
+        timeArray[3] = 10;
+        timeArray[4] = 7;
+        timeArray[5] = 7;
+        timeArray[6] = 7;
+        timeArray[7] = 7;
+        timeArray[8] = 7;
+
+
+        exNumArray[0] = 3;
+        exNumArray[1] = 5;
+        exNumArray[2] = 3;
+        exNumArray[3] = 5;
+        exNumArray[4] = 3;
+        exNumArray[5] = 5;
+        exNumArray[6] = 7;
+        exNumArray[7] = 10;
+        exNumArray[8] = 15;
+
+
+        maxResultArray[0] = 10;
+        maxResultArray[1] = 10;
+        maxResultArray[2] = 10;
+        maxResultArray[3] = 10;
+        maxResultArray[4] = 10;
+        maxResultArray[5] = 10;
+        maxResultArray[6] = 10;
+        maxResultArray[7] = 10;
+        maxResultArray[8] = 10;
+
+    }
+
+
+
+
+
+    private void setViews(){
+        tv = (TextView) findViewById(R.id.tv);
+        tva1 = (TextView) findViewById(R.id.tva1);
+        tva2 = (TextView) findViewById(R.id.tva2);
+        tva3 = (TextView) findViewById(R.id.tva3);
+        tva4 = (TextView) findViewById(R.id.tva4);
+        iv = (ImageView) findViewById(R.id.iv);
+        hiv1 = (ImageView) findViewById(R.id.hiv1);
+        hiv2 = (ImageView) findViewById(R.id.hiv2);
+        hiv3 = (ImageView) findViewById(R.id.hiv3);
+        tvScore = (TextView) findViewById(R.id.score);
+        mAdView = findViewById(R.id.adView);
+        timer = (TextView) findViewById(R.id.timer);
+
+    }
+
+    private void setSound(){
+        correctSound= MediaPlayer.create(Game.this,R.raw.correct);
+        falseSound= MediaPlayer.create(Game.this,R.raw.eror);
+        threeSecondsSound = MediaPlayer.create(Game.this,R.raw.three_seconds);
+        gameSound= MediaPlayer.create(Game.this,R.raw.game_sound);
+    }
+
+
+
 
 
 }
