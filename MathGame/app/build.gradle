@@ -11,8 +11,8 @@ android {
         applicationId "com.dan.kaftan.mathgame"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 29
-        versionName "29"
+        versionCode 30
+        versionName "30"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

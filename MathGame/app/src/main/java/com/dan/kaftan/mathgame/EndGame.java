@@ -33,17 +33,12 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
     int score = 0;
     int bestScore = 0;
     Button btnStartNewGame;
-    String bestScoreString;
     Button btnShare;
     Button muteBtn;
     Button rateStarBtn;
-    StringBuffer stringBuffer;
     Button btnRevive;
-    ImageView ivRevive;
     TextView tvBestScore;
-    TextView tvRevive;
     private RewardedVideoAd mRewardedVideoAd;
-    private NativeExpressAdView nativeExpressAdView;
     private static final String FILE_NAME = "best_score.txt";
     boolean revive = false;
     private static final String TAG = "MainActivity";
@@ -414,6 +409,12 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
         else{
             muteBtn.setBackgroundResource(R.drawable.mute_off_btn);
         }
+    }
+
+    public void homeBtnOnClick(View view) {
+
+        Intent i = new Intent(EndGame.this, MainActivity.class);
+        startActivity(i);
     }
 }
 

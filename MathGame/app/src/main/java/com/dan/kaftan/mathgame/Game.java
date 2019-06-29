@@ -62,6 +62,7 @@ public class Game extends AppCompatActivity {
     TextView tva4;
     TextView timer;
     TextView tvScore;
+    TextView levelTv;
 
     ImageView iv;
     ImageView hiv1;
@@ -80,6 +81,7 @@ public class Game extends AppCompatActivity {
     // for disabling sound
     boolean  isVisible = true;
     boolean gameOver = false;
+    boolean levelPassed;
 
 
     // sounds
@@ -137,15 +139,24 @@ public class Game extends AppCompatActivity {
 
         copyReviveFromPrevActivity();
         copyScoreFromPrevActivity(revive);
-        tvScore.setText("score: " + Integer.toString(score));
+        if (!isLevel) {
+            tvScore.setText("score: " + Integer.toString(score));
+        }
+        else
+        {
+            tvScore.setText(currentExNum + "/" + exNumArray[levelNum -1]);
+            levelTv.setText("level: "+ levelNum);
+
+        }
 
 
         getDifficulty();
         getTimerSeconds();
    //     initTargilim(10,10,100,false,"x");
 
-        initTargilim(maxAnswer-1,maxAnswer-1,maxAnswer, true,"+");
-
+        if (!isLevel) {
+            initTargilim(maxAnswer - 1, maxAnswer - 1, maxAnswer, true, "+");
+        }
         setSound();
 
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -161,6 +172,8 @@ public class Game extends AppCompatActivity {
     //  Game setter
 
     public void setGame() {
+
+        System.out.println("levelNum" + levelNum);
 
         initGameView();
 
@@ -394,19 +407,33 @@ public class Game extends AppCompatActivity {
                     hiv1.setVisibility(View.INVISIBLE);
                 }
             }
-            tvScore.setText("score: " + Integer.toString(score));
-            if (!isLevel) {
+            if(!isLevel){
+                tvScore.setText("score: " + Integer.toString(score));
+            }
+            else{
+                tvScore.setText(currentExNum + " /" + exNumArray[levelNum-1]);
+            }
                 if (invalidationCounter != 3) {
                     setTimerForViewResult();
-                } else {
-                    setTimerForGameOver();
-                }
+
+                    if ((exNumArray [levelNum -1] == currentExNum)&& (isLevel)){
+
+                        levelNum ++;
+                        if (levelNum == 47){
+                        }
+                        levelPassed = true;
+                        setTimerForGameOver();
+                    }
+                    if (invalidationCounter ==2){
+                        levelPassed = false;
+                        setTimerForGameOver();
+
+                    }
             }
             else
             {
-                if (exNumArray [levelNum -1] == currentExNum){
-                    setTimerForGameOver();
-                }
+                setTimerForGameOver();
+
             }
 
         } catch (Exception e) {
@@ -417,12 +444,27 @@ public class Game extends AppCompatActivity {
 
     public void gameOver() {
 
+
+        System.out.println("levelNum" + levelNum);
+
         if (isVisible) {
 
-                Intent a = new Intent(Game.this, EndGame.class);
+            Intent a;
+            if (!isLevel) {
+                a = new Intent(Game.this, EndGame.class);
+            }
+            else{
+                saveLevel();
+                a = new Intent(Game.this, EndLevel.class);
+
+            }
+
                 a.putExtra("score", score);
+                a.putExtra("isLevel", isLevel);
                 a.putExtra("revive", revive);
                 a.putExtra("mute", mute);
+                a.putExtra("levelNum", levelNum);
+                a.putExtra("levelPassed", levelPassed);
                 startActivity(a);
         } else{
             gameOver = true;
@@ -605,14 +647,19 @@ public class Game extends AppCompatActivity {
         setLevel();
         setLevelsArrays();
 
+
+
+
         Intent intent = getIntent();
         isLevel = intent.getBooleanExtra("isLevel", false);
-        tvScore.setVisibility(View.INVISIBLE);
-        hiv1.setVisibility(View.INVISIBLE);
-        hiv2.setVisibility(View.INVISIBLE);
-        hiv3.setVisibility(View.INVISIBLE);
+        if (isLevel){
+            hiv1.setVisibility(View.INVISIBLE);
+            hiv2.setVisibility(View.INVISIBLE);
+            tvScore.setVisibility(View.INVISIBLE);
+            initTargilim(maxAnswer-1,maxAnswer-1, maxResultArray[levelNum-1], true,"+");
+        }
 
-        initTargilim(maxAnswer-1,maxAnswer-1, maxResultArray[levelNum-1], true,"+");
+
 
 
 
@@ -645,6 +692,10 @@ public class Game extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+            else
+            {
+                levelNum = 0;
             }
         }
     }
@@ -682,13 +733,56 @@ public class Game extends AppCompatActivity {
 
         timeArray[0] = 15;
         timeArray[1] = 15;
-        timeArray[2] = 10;
-        timeArray[3] = 10;
-        timeArray[4] = 7;
-        timeArray[5] = 7;
-        timeArray[6] = 7;
-        timeArray[7] = 7;
+        timeArray[2] = 12;
+        timeArray[3] = 12;
+        timeArray[4] = 10;
+        timeArray[5] = 10;
+        timeArray[6] = 20;
+        timeArray[7] = 20;
         timeArray[8] = 7;
+        timeArray[9] = 7;
+        timeArray[10] = 7;
+        timeArray[11] = 5;
+        timeArray[12] = 4;
+        timeArray[13] = 7;
+        timeArray[14] = 7;
+        timeArray[15] = 7;
+        timeArray[16] = 7;
+        timeArray[17] = 5;
+        timeArray[18] = 3;
+        timeArray[19] = 3;
+        timeArray[20] = 2;
+        timeArray[21] = 2;
+        timeArray[22] = 10;
+        timeArray[23] = 10;
+        timeArray[24] = 10;
+        timeArray[25] = 10;
+        timeArray[26] = 7;
+        timeArray[27] = 7;
+        timeArray[28] = 7;
+        timeArray[29] = 5;
+        timeArray[30] = 5;
+        timeArray[31] = 7;
+        timeArray[32] = 7;
+        timeArray[33] = 7;
+        timeArray[34] = 5;
+        timeArray[35] = 3;
+        timeArray[36] = 3;
+        timeArray[37] = 2;
+        timeArray[38] = 2;
+        timeArray[39] = 10;
+        timeArray[40] = 10;
+        timeArray[41] = 10;
+        timeArray[42] = 10;
+        timeArray[43] = 7;
+        timeArray[44] = 7;
+        timeArray[45] = 7;
+        timeArray[46] = 5;
+        timeArray[47] = 5;
+
+
+
+
 
 
         exNumArray[0] = 3;
@@ -698,19 +792,56 @@ public class Game extends AppCompatActivity {
         exNumArray[4] = 3;
         exNumArray[5] = 5;
         exNumArray[6] = 7;
-        exNumArray[7] = 10;
-        exNumArray[8] = 15;
+        exNumArray[7] = 20;
+        exNumArray[8] = 20;
+        exNumArray[9] = 10;
+        exNumArray[10] = 10 ;
+        exNumArray[11] = 3;
+        exNumArray[12] = 3;
+        exNumArray[13] = 7;
+        exNumArray[14] = 20;
+        exNumArray[15] = 25;
+        exNumArray[16] = 30;
+        exNumArray[17] = 25;
+        exNumArray[18] = 10;
+        exNumArray[19] = 15;
+        exNumArray[20] = 5;
+        exNumArray[21] = 7;
+        exNumArray[22] = 20;
+        exNumArray[23] = 25;
+        exNumArray[24] = 30;
+        exNumArray[25] = 35;
+        exNumArray[26] = 20;
+        exNumArray[27] = 25;
+        exNumArray[28] = 30;
+        exNumArray[29] = 25;
+        exNumArray[30] = 30;
+        exNumArray[31] = 20;
+        exNumArray[32] = 25;
+        exNumArray[33] = 30;
+        exNumArray[34] = 25;
+        exNumArray[35] = 10;
+        exNumArray[36] = 15;
+        exNumArray[37] = 5;
+        exNumArray[38] = 7;
+        exNumArray[39] = 20;
+        exNumArray[40] = 25;
+        exNumArray[41] = 30;
+        exNumArray[42] = 35;
+        exNumArray[43] = 20;
+        exNumArray[44] = 25;
+        exNumArray[45] = 30;
+        exNumArray[46] = 25;
+        exNumArray[47] = 30;
 
 
-        maxResultArray[0] = 10;
-        maxResultArray[1] = 10;
-        maxResultArray[2] = 10;
-        maxResultArray[3] = 10;
-        maxResultArray[4] = 10;
-        maxResultArray[5] = 10;
-        maxResultArray[6] = 10;
-        maxResultArray[7] = 10;
-        maxResultArray[8] = 10;
+
+
+
+        for (int i = 0; i <=47; i ++){
+            maxResultArray[i] = 10;
+
+        }
 
     }
 
@@ -724,13 +855,15 @@ public class Game extends AppCompatActivity {
         tva2 = (TextView) findViewById(R.id.tva2);
         tva3 = (TextView) findViewById(R.id.tva3);
         tva4 = (TextView) findViewById(R.id.tva4);
+        tvScore = (TextView) findViewById(R.id.score);
+        timer = (TextView) findViewById(R.id.timer);
+        levelTv = (TextView)findViewById(R.id.level_tv);
+
         iv = (ImageView) findViewById(R.id.iv);
         hiv1 = (ImageView) findViewById(R.id.hiv1);
         hiv2 = (ImageView) findViewById(R.id.hiv2);
         hiv3 = (ImageView) findViewById(R.id.hiv3);
-        tvScore = (TextView) findViewById(R.id.score);
         mAdView = findViewById(R.id.adView);
-        timer = (TextView) findViewById(R.id.timer);
 
     }
 
@@ -742,9 +875,10 @@ public class Game extends AppCompatActivity {
     }
 
 
-
-
-
+    public void homeClick(View view) {
+        Intent i = new Intent(Game.this, MainActivity.class);
+        startActivity(i);
+    }
 }
 
 

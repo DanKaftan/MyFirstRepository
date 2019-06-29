@@ -14,6 +14,11 @@ import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity{
 
     Button settingsBtn;
@@ -50,6 +55,8 @@ public class MainActivity extends AppCompatActivity{
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+        makeFile();
 
     }
 
@@ -106,6 +113,39 @@ public class MainActivity extends AppCompatActivity{
         i.putExtra("isLevel",isLevel);
         startActivity(i);
     }
+
+
+    private void makeFile() {
+
+        File file = new File(getApplicationContext().getFilesDir(),"level");
+        if (!file.exists()) {
+
+
+            FileOutputStream fos = null;
+
+
+            try {
+                fos = openFileOutput("level", MODE_PRIVATE);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (fos != null) {
+
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }
+    }
+
+
+
 }
 
 
