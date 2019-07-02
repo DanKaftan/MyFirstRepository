@@ -256,7 +256,7 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
         startActivity(i);
     }
 
- /*   @Override
+   @Override
     public void onResume() {
         mRewardedVideoAd.resume(this);
         super.onResume();
@@ -276,7 +276,7 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
 
 
     }
-     */
+
 
     public int getScore() {
         return score;
