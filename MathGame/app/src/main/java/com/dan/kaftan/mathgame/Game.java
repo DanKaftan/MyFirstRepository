@@ -2,14 +2,23 @@ package com.dan.kaftan.mathgame;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dan.kaftan.mathgame.targil.BankOfTargils;
+import com.dan.kaftan.mathgame.targil.Targil;
+import com.dan.kaftan.mathgame.targil.TargilAdd;
+import com.dan.kaftan.mathgame.targil.TargilMultiply;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -22,16 +31,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import com.dan.kaftan.mathgame.targil.BankOfTargils;
-import com.dan.kaftan.mathgame.targil.Targil;
-import com.dan.kaftan.mathgame.targil.TargilAdd;
-import com.dan.kaftan.mathgame.targil.TargilMultiply;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
 
 public class Game extends AppCompatActivity {
 
