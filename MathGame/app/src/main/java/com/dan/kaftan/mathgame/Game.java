@@ -101,9 +101,9 @@ public class Game extends AppCompatActivity {
     private RewardedVideoAd mRewardedVideoAd;
 
 
-    int [] timeArray = new int [20];
-    int [] exNumArray = new int [20];
-    int [] maxResultArray = new int [20];
+    int [] timeArray = new int [48];
+    int [] exNumArray = new int [48];
+    int [] maxResultArray = new int [48];
 
 
 
