@@ -120,8 +120,9 @@ public class Game extends AppCompatActivity {
         levelMode();
         Random random = new Random();
         rand1 = random.nextInt(2);
+        interstitialAd = new InterstitialAd(this);
+
         if(rand1==1) {
-            interstitialAd = new InterstitialAd(this);
             interstitialAd.setAdUnitId("ca-app-pub-7775472521601802/1382168273");
             interstitialAd.loadAd(new AdRequest.Builder().build());
 
