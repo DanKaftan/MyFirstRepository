@@ -40,9 +40,13 @@ public class EndLevel extends AppCompatActivity {
         getSupportActionBar().hide();
 
 
-            if (Game.interstitialAd.isLoaded()) {
+        try {
+            if (Game.interstitialAd != null && Game.interstitialAd.isLoaded()) {
                 Game.interstitialAd.show();
             }
+        }catch (Exception e){
+            // never mind, it is just an Ad...
+        }
 
 
 

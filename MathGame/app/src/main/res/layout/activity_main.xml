@@ -54,7 +54,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="331dp"
-        android:layout_height="305dp"
+        android:layout_height="299dp"
         android:layout_marginTop="16dp"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintHorizontal_bias="0.509"
@@ -77,12 +77,13 @@
 
     <Button
         android:id="@+id/lv_btn"
-        android:layout_width="275dp"
-        android:layout_height="76dp"
-        android:background="@drawable/level_btn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/levelsBtn"
         android:onClick="levelOnClick"
         ads:layout_constraintBottom_toTopOf="@+id/adView"
         ads:layout_constraintEnd_toStartOf="@+id/btn_pay"
+        ads:layout_constraintHorizontal_bias="0.782"
         ads:layout_constraintStart_toEndOf="@+id/btn_pay"
         ads:layout_constraintTop_toBottomOf="@+id/btn_pay"
         ads:layout_constraintVertical_bias="0.444" />

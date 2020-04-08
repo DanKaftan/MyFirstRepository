@@ -423,11 +423,11 @@ public class Game extends AppCompatActivity {
                         }
                         levelPassed = true;
                         setTimerForGameOver();
-                    }
-                    if (invalidationCounter ==2){
-                        levelPassed = false;
-                        setTimerForGameOver();
 
+                        if (invalidationCounter ==2){
+                            levelPassed = false;
+                            setTimerForGameOver();
+                        }
                     }
             }
             else
@@ -485,10 +485,10 @@ public class Game extends AppCompatActivity {
 
                 timerNum = timerNum - 1;
 
-                if (!mute) {
+                if (!mute && gameSound != null) {
                     gameSound.start();
                 }
-               if(isVisible == false){
+               if(isVisible == false && gameSound != null){
                    gameSound.pause();
                }
 
@@ -538,7 +538,9 @@ public class Game extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
         isVisible = hasFocus;
 
-        gameSound.pause();
+        if (gameSound != null){
+            gameSound.pause();
+        }
         threeSecondsSound.pause();
         if (isVisible && gameOver) {
             gameOver = false;

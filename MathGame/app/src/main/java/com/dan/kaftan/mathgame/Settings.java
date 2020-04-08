@@ -43,28 +43,28 @@ public class Settings extends AppCompatActivity {
 
     public void setTimerSpinner(){
 
-        timerSpinner = (Spinner) findViewById(R.id.spinner);
+                timerSpinner = (Spinner) findViewById(R.id.spinner);
 
-        ArrayList<Integer> arraySpinner = new ArrayList(5);
+                ArrayList<Integer> arraySpinner = new ArrayList(5);
 
-        arraySpinner.add(3);
-        arraySpinner.add(5);
-        arraySpinner.add(10);
-        arraySpinner.add(15);
-        arraySpinner.add(20);
+                arraySpinner.add(3);
+                arraySpinner.add(5);
+                arraySpinner.add(10);
+                arraySpinner.add(15);
+                arraySpinner.add(20);
 
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, arraySpinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        timerSpinner.setAdapter(adapter);
-        switch (selectedTimerSeconds){
+                ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, arraySpinner);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                timerSpinner.setAdapter(adapter);
+                switch (selectedTimerSeconds){
 
-            case 3: timerSpinner.setSelection(0);
+                    case 3: timerSpinner.setSelection(0);
 
-                break;
-            case 5: timerSpinner.setSelection(1);
-                break;
-            case 10: timerSpinner.setSelection(2);
-                break;
+                        break;
+                    case 5: timerSpinner.setSelection(1);
+                        break;
+                    case 10: timerSpinner.setSelection(2);
+                        break;
             case 15: timerSpinner.setSelection(3);
                 break;
             case 20: timerSpinner.setSelection(4);

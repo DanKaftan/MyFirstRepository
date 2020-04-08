@@ -47,7 +47,9 @@ getSupportActionBar().hide();
                     catch (InterruptedException e){
 
                     }
-                    startGameMusic.start();
+                    if (startGameMusic!=null) {
+                        startGameMusic.start();
+                    }
                     sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
