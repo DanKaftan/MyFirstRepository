@@ -90,11 +90,11 @@ public class MainActivity extends AppCompatActivity{
 
         if (!mute) {
             mute = true;
-            muteBtn.setBackgroundResource(R.drawable.mute_on_btn);
+            muteBtn.setBackgroundResource(R.drawable.mute_btn);
             mainActivityBackgroud.pause();
         } else {
             mute = false;
-            muteBtn.setBackgroundResource(R.drawable.mute_off_btn);
+            muteBtn.setBackgroundResource(R.drawable.unmute_btn);
             mainActivityBackgroud.start();
 
 

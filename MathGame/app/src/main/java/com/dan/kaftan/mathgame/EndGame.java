@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +48,26 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
     boolean mute;
 
 
+
+
+
+    Thread tr1 = new Thread(new Runnable() {
+        @Override
+        public void run() {
+
+            Animation animZoomIn = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);
+            Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out);
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    btnRevive.startAnimation(animZoomIn);
+                    Thread.sleep(1000);
+                    btnRevive.startAnimation(animZoomOut);
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                }
+            }
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,10 +161,7 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
             }
         });
 
-
-
-
-
+        tr1.start();
 
     }
 
@@ -279,9 +298,8 @@ public class EndGame extends AppCompatActivity implements RewardedVideoAdListene
     public void onDestroy() {
         mRewardedVideoAd.destroy(this);
         revive=false;
+        tr1.interrupt();
         super.onDestroy();
-
-
     }
 
     public int getScore() {

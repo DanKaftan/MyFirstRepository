@@ -152,10 +152,16 @@ public class Game extends AppCompatActivity {
 
         getDifficulty();
         getTimerSeconds();
-   //     initTargilim(10,10,100,false,"x");
 
         if (!isLevel) {
-            initTargilim(maxAnswer - 1, maxAnswer - 1, maxAnswer, true, "+");
+
+            // regular add game
+            //  initTargilim(maxAnswer - 1, maxAnswer - 1, maxAnswer, true, "+");
+
+
+            // multiplaction table
+            initTargilim(10,10,100,false,"x");
+
         }
         setSound();
 
@@ -351,7 +357,6 @@ public class Game extends AppCompatActivity {
     public void handleClick(View v, TextView tva, boolean timeOut) throws InterruptedException {
         try {
 
-            currentExNum ++;
 
             // first, cancel timer as the user clicked
             if (mcountDownTimer != null) {
@@ -375,6 +380,7 @@ public class Game extends AppCompatActivity {
 
             if (!timeOut && tvaNum == trueAnswer) {
                 iv.setImageResource(R.drawable.vi);
+                currentExNum ++;
 
                 // do not disturb with sounds if not visible
                 if(isVisible && !mute){
@@ -384,7 +390,10 @@ public class Game extends AppCompatActivity {
                 score = score + 10;
                 answerCheck = true;
 
+                if(isLevel) {
+                    tvScore.setText(currentExNum + " /" + exNumArray[levelNum - 1]);
 
+                }
                 //result();
             } else {
                 iv.setImageResource(R.drawable.x);
@@ -411,7 +420,6 @@ public class Game extends AppCompatActivity {
                 tvScore.setText("score: " + Integer.toString(score));
             }
             else{
-                tvScore.setText(currentExNum + " /" + exNumArray[levelNum-1]);
             }
                 if (invalidationCounter != 3) {
                     setTimerForViewResult();
@@ -424,7 +432,7 @@ public class Game extends AppCompatActivity {
                         levelPassed = true;
                         setTimerForGameOver();
 
-                        if (invalidationCounter ==2){
+                        if (invalidationCounter ==3){
                             levelPassed = false;
                             setTimerForGameOver();
                         }
@@ -655,10 +663,10 @@ public class Game extends AppCompatActivity {
         Intent intent = getIntent();
         isLevel = intent.getBooleanExtra("isLevel", false);
         if (isLevel){
-            hiv1.setVisibility(View.INVISIBLE);
-            hiv2.setVisibility(View.INVISIBLE);
             tvScore.setVisibility(View.INVISIBLE);
-            initTargilim(maxAnswer-1,maxAnswer-1, maxResultArray[levelNum-1], true,"+");
+            initTargilim(maxAnswer-1,maxAnswer-1, maxResultArray[levelNum-1], true,"x");
+
+//            initTargilim(maxAnswer-1,maxAnswer-1, maxResultArray[levelNum-1], true,"+");
         }
 
 

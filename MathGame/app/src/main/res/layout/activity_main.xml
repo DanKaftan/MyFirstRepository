@@ -5,24 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menu_background"
+    android:background="@drawable/main_activity_background"
     android:layoutDirection="ltr"
     tools:context="com.dan.kaftan.mathgame.MainActivity">
 
     <Button
         android:id="@+id/btn_pay"
-        android:layout_width="275dp"
-        android:layout_height="76dp"
+        android:layout_width="166dp"
+        android:layout_height="140dp"
+
         android:background="@drawable/regular_game_btn"
         android:onClick="startGameClick"
         android:textSize="36sp"
         android:textStyle="bold"
-        ads:layout_constraintHorizontal_bias="0.504"
-        ads:layout_constraintVertical_bias="0.675"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        ads:layout_constraintBottom_toTopOf="@+id/lv_btn"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.5"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <Button
+        android:id="@+id/lv_btn"
+        android:layout_width="139dp"
+        android:layout_height="125dp"
+        android:background="@drawable/levels_btn"
+        android:onClick="levelOnClick"
+        ads:layout_constraintBottom_toTopOf="@+id/adView"
+        ads:layout_constraintEnd_toStartOf="@+id/adView"
+        ads:layout_constraintHorizontal_bias="0.5"
+        ads:layout_constraintStart_toEndOf="@+id/adView"
+        ads:layout_constraintTop_toBottomOf="@+id/btn_pay" />
 
 
     <com.google.android.gms.ads.AdView
@@ -43,7 +55,7 @@
         android:id="@+id/settings_btn"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/settings"
+        android:background="@drawable/setting_btn"
         android:clickable="true"
         android:onClick="settingsClick"
         ads:layout_constraintHorizontal_bias="0.0"
@@ -53,39 +65,26 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="331dp"
-        android:layout_height="299dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="281dp"
+        android:layout_height="192dp"
         ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintHorizontal_bias="0.509"
+        ads:layout_constraintHorizontal_bias="0.504"
         ads:layout_constraintStart_toStartOf="parent"
-        ads:layout_constraintTop_toTopOf="parent"
-        ads:srcCompat="@mipmap/icon" />
+        ads:layout_constraintTop_toBottomOf="@+id/settings_btn"
+        ads:srcCompat="@drawable/icon1" />
 
     <Button
         android:id="@+id/mute_btn"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/mute_off_btn"
+        android:background="@drawable/unmute_btn"
         android:onClick="muteOnClick"
         ads:layout_constraintBottom_toTopOf="@+id/imageView2"
         ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintHorizontal_bias="0.06"
+        ads:layout_constraintHorizontal_bias="0.0"
         ads:layout_constraintStart_toEndOf="@+id/settings_btn"
         ads:layout_constraintTop_toTopOf="parent"
         ads:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/lv_btn"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/levelsBtn"
-        android:onClick="levelOnClick"
-        ads:layout_constraintBottom_toTopOf="@+id/adView"
-        ads:layout_constraintEnd_toStartOf="@+id/btn_pay"
-        ads:layout_constraintHorizontal_bias="0.782"
-        ads:layout_constraintStart_toEndOf="@+id/btn_pay"
-        ads:layout_constraintTop_toBottomOf="@+id/btn_pay"
-        ads:layout_constraintVertical_bias="0.444" />
 
 </android.support.constraint.ConstraintLayout>

@@ -12,8 +12,8 @@ import android.widget.TextView;
 public class welcome_screen extends AppCompatActivity {
 
     ImageView iv;
-    TextView tv1;
     TextView tv2;
+    ImageView icon;
     MediaPlayer startGameMusic;
 
     @Override
@@ -22,12 +22,12 @@ public class welcome_screen extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_screen);
 getSupportActionBar().hide();
         iv = (ImageView)findViewById(R.id.iv);
-        tv1 = (TextView)findViewById(R.id.tv1);
         tv2 = (TextView)findViewById(R.id.tv2);
+        icon = (ImageView)findViewById(R.id.imageView4);
         Animation myanim = AnimationUtils.loadAnimation(this, R.anim.mytransition);
-        tv1.startAnimation(myanim);
         tv2.startAnimation(myanim);
         iv.startAnimation(myanim);
+        icon.startAnimation(myanim);
         startGameMusic= MediaPlayer.create(welcome_screen.this,R.raw.start_game_music);
         swichActivity();
 
